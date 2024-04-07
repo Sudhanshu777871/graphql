@@ -23,7 +23,8 @@ async function callFun() {
         }
  type Query{
     getTodos:[Todo],
-    getUsers:[Users]
+    getUsers:[Users],
+    getParticularUser(id:ID!):Users
  }
 
         `,
@@ -31,6 +32,7 @@ async function callFun() {
             Query: {
                 getTodos: async () => (await fetch("https://jsonplaceholder.typicode.com/todos")).json(),
                 getUsers: async () => (await fetch("https://jsonplaceholder.typicode.com/users")).json(),
+                getParticularUser: async (parent, { id }) => (await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)).json()
             }
         }
     });
